@@ -2,7 +2,7 @@
 title: 響應式網頁設計 vs. 手機版網頁和手機APP：選擇最適合的設計方案
 date: "2023-01-08"
 description: "隨著手機使用率的不斷攀升，越來越多的網站和企業開始關注手機用戶體驗。響應式網頁設計是一種適應不同設備屏幕尺寸的"
-image: "https://twotrees.tw/wp-content/uploads/2023/01/responsive_web_design_illustrator-1.jpg"
+image: "/images/blog/responsive_web_design_illustrator-1.jpg"
 categories: ["網站相關知識"]
 ---
 
@@ -16,7 +16,7 @@ categories: ["網站相關知識"]
 
 相比於傳統的固定尺寸網頁設計，RWD能夠更好地適應各種設備，包括桌面電腦、筆記型電腦、平板電腦和手機等，並提供更好的使用體驗。使用RWD設計的網頁能夠自動調整佈局、字體大小、圖像尺寸等，以符合不同設備的需求，讓使用者能夠輕鬆地瀏覽和操作網頁，無論是在何種設備上使用。
 
-![](https://twotrees.tw/wp-content/uploads/2023/01/Image-7.jpg)
+![](/images/blog/Image-7.jpg)
 
 ### 網頁手機版(Mobile Site)
 
@@ -27,7 +27,7 @@ categories: ["網站相關知識"]
 
 專門為行動裝置使用者提供的手機應用程式，可以更直覺在手機進行資訊推播，但手機APP較複雜的是，目前主流的手機作業系統就分為IOS與Android，所以過去要製作手機APP就必須分別為兩個作業系統製作APP，但其維護成本高，製作成本也高。後來延伸了混和APP，就是以網頁技術的框架來製作手機APP，這樣混和方式能夠同時兼容兩個作業系統，大幅降低維護成本，但缺點就是少了原生作業系統的推播功能與使用上的直覺性。
 
-![](https://twotrees.tw/wp-content/uploads/2023/01/tiktok-g6fa120056_640.jpg)
+![](/images/blog/tiktok-g6fa120056_640.jpg)
 
 ### 我們應該採用適合哪種技術最為合適?
 

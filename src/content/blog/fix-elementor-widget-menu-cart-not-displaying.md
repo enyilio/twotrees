@@ -2,7 +2,7 @@
 title: 修復Elementor Widget menu cart 無法正常顯示內容
 date: "2023-06-20"
 description: "此次在協助處理WooCommrece網站Bug問題，是關於網站頁首(Header)的menu cart功能，當"
-image: "https://twotrees.tw/wp-content/uploads/2023/06/2023062001website-design.jpg"
+image: "/images/blog/2023062001website-design.jpg"
 categories: ["WordPress相關文章"]
 ---
 
@@ -14,9 +14,9 @@ categories: ["WordPress相關文章"]
 
 當點選頁首(Header)上方的Menu Cart，滑動選單內無法正常顯示內容。
 
-![](https://twotrees.tw/wp-content/uploads/2023/06/2023062002website-design.jpg)
+![](/images/blog/2023062002website-design.jpg)
 
-![](https://twotrees.tw/wp-content/uploads/2023/06/2023062003website-design.jpg)
+![](/images/blog/2023062003website-design.jpg)
 
 ### JS文件沒有正常載入
 
@@ -35,7 +35,7 @@ add_action('wp_enqueue_scripts', 'elementor_menucart_js_css', 999);
 
 經測試，當重新引入 **cart-fragments.min.js 後，**點選menu cart按鈕，確實已正常顯示內容。								
 
-![](https://twotrees.tw/wp-content/uploads/2023/06/2023062004website-design.jpg)
+![](/images/blog/2023062004website-design.jpg)
 
 如果你的網站正在使用elementor的menu cart小工具，且有遇到類似的問題，可以嘗試看看。
 

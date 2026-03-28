@@ -3,6 +3,5 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   integrations: [tailwind()],
-  site: 'https://enyilio.github.io',
-  base: '/twotrees',
+  site: 'https://twotrees.tw',
 });

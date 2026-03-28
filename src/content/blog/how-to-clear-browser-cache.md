@@ -2,7 +2,7 @@
 title: 如何清除瀏覽器快取，查看網站最真實的狀況
 date: "2022-03-26"
 description: "當客戶在網站後台修改內容後，若在網站前台未即時顯示更改，建議客戶先清除瀏覽器快取並重新整理頁面，以確認更改已生"
-image: "https://twotrees.tw/wp-content/uploads/2022/03/clear-browser-cache.jpg"
+image: "/images/blog/clear-browser-cache.jpg"
 categories: ["網站相關知識"]
 ---
 
@@ -25,13 +25,13 @@ categories: ["網站相關知識"]
 1. 打開 Chrome 瀏覽器。
 2. 點擊右上角的菜單圖示，然後選擇「更多工具」→「清除瀏覽資料」。
 
-![](https://twotrees.tw/wp-content/uploads/2023/01/Image-12-1024x676.jpg)
+![](/images/blog/Image-12-1024x676.jpg)
 
 3. 在「清除瀏覽資料」對話框中，選擇「全部時間」。
 4. 勾選「圖像和檔案快取」和「cookie 和其他網站資料」。
 5. 點擊「清除資料」按鈕。
 
-![](https://twotrees.tw/wp-content/uploads/2023/01/Image-13.jpg)
+![](/images/blog/Image-13.jpg)
 
 #### Fox瀏覽器中清除快取方式
 
@@ -39,12 +39,12 @@ categories: ["網站相關知識"]
 
 2.點擊右上角的菜單圖示，然後選擇「設定」。
 
-![](https://twotrees.tw/wp-content/uploads/2023/01/Image-16.jpg)
+![](/images/blog/Image-16.jpg)
 
 3.在「隱私權和安全性」選項卡中，向下滾動到「瀏覽紀錄」部分。
 4.點擊「立即清除快取」按鈕。
 
-![](https://twotrees.tw/wp-content/uploads/2023/01/Image-18-1024x343.jpg)
+![](/images/blog/Image-18-1024x343.jpg)
 
 #### 手機或其他瀏覽器中清除快取方式
 

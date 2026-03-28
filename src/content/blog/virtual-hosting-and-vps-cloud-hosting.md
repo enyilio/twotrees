@@ -2,7 +2,7 @@
 title: 虛擬主機與VPS雲端主機的差異與適用時機
 date: "2022-03-26"
 description: "目前網站建置最常使用的主機為虛擬主機與VPS雲端主機，其主要原因為成本考量與穩定的效能。以下為虛擬主機與VPS"
-image: "https://twotrees.tw/wp-content/uploads/2022/03/hosting.jpg"
+image: "/images/blog/hosting.jpg"
 categories: ["網站相關知識"]
 ---
 
@@ -10,7 +10,7 @@ categories: ["網站相關知識"]
 
 #### 目錄
 
-![](https://twotrees.tw/wp-content/uploads/2022/03/web-hosting-1024x576.jpg)
+![](/images/blog/web-hosting-1024x576.jpg)
 
 ### 虛擬主機介紹(Shared Web Hosting)
 

@@ -2,7 +2,7 @@
 title: 一個優良的企業形象網站，應該具備哪些條件?
 date: "2021-03-19"
 description: "一個優良的企業形象網站應該具有專業的外觀和設計、明確的目的和目標、豐富的內容、響應式設計、易於導航和使用、安全"
-image: "https://twotrees.tw/wp-content/uploads/2021/03/office-space-gd5f79499d_1280.jpg"
+image: "/images/blog/office-space-gd5f79499d_1280.jpg"
 categories: ["網站相關知識"]
 ---
 
@@ -10,7 +10,7 @@ categories: ["網站相關知識"]
 
 #### 目錄
 
-![](https://twotrees.tw/wp-content/uploads/2021/03/office-space-gd5f79499d_1280.jpg)
+![](/images/blog/office-space-gd5f79499d_1280.jpg)
 
 ### 專業的外觀和設計
 

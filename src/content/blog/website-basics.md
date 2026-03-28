@@ -2,7 +2,7 @@
 title: 製作一個網站基本具備的元素有哪些?
 date: "2022-03-25"
 description: "不論您是想DIY建置網站，或是要委外網頁設計公司建置網站，瞭解一個網站建置是如何開始，前置工作又應該有哪些必須"
-image: "https://twotrees.tw/wp-content/uploads/2022/03/pexels-tranmautritam-326501.jpg"
+image: "/images/blog/pexels-tranmautritam-326501.jpg"
 categories: ["網站相關知識"]
 ---
 

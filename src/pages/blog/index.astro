@@ -1,0 +1,95 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CuteButton from '../../components/CuteButton.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<Layout title="網站知識 | 兩棵樹創意行動工作室" description="WordPress 教學、SEO 知識、網站設計技巧分享">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 bg-cream/85 backdrop-blur border-b border-wood/10">
+    <div class="section-wrap flex items-center justify-between py-2" style="height:4.5rem">
+      <a href="/" class="flex items-center group">
+        <img
+          src="https://twotrees.tw/wp-content/uploads/2022/03/twtreeslogo.svg"
+          alt="兩棵樹創意行動工作室"
+          class="h-12 w-auto group-hover:scale-105 transition-transform duration-300"
+        />
+      </a>
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-bark/70">
+        <a href="/#services" class="hover:text-olive transition-colors">服務</a>
+        <a href="/#about"    class="hover:text-olive transition-colors">關於</a>
+        <a href="/blog"      class="text-olive font-bold">網站知識</a>
+        <a href="/#contact"  class="hover:text-olive transition-colors">聯絡</a>
+      </nav>
+      <CuteButton label="合作洽詢" href="mailto:service@twotrees.tw" size="sm" icon="🌿" />
+    </div>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <div class="bg-mist border-b border-wood/10" style="padding-top:50px; padding-bottom:50px">
+    <div class="section-wrap">
+      <span class="tag-badge">📖 網站知識</span>
+      <h1 class="mt-4 text-4xl md:text-5xl font-bold text-olive-dark">所有文章</h1>
+    </div>
+  </div>
+
+  <!-- ARTICLE LIST -->
+  <main style="padding-top:50px; padding-bottom:50px">
+    <div class="section-wrap">
+      <ul class="flex flex-col gap-4 sm:gap-5 md:gap-6">
+        {posts.map(post => {
+          const d = new Date(post.data.date).toLocaleDateString('zh-TW', {
+            year: 'numeric', month: 'long', day: 'numeric'
+          });
+          const cat = post.data.categories?.[0] ?? '';
+          return (
+            <li>
+              <a
+                href={`/blog/${post.slug}`}
+                class="group flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8
+                       bg-white border border-wood/10 rounded-cute
+                       px-6 py-6 sm:px-8 sm:py-7 md:px-10 md:py-8
+                       hover:shadow-md hover:border-olive/20 hover:-translate-y-0.5
+                       transition-all duration-300"
+              >
+                <!-- 日期欄（桌機左側固定寬） -->
+                <div class="shrink-0 sm:w-32 md:w-36 flex items-center sm:items-start">
+                  <time class="text-xs text-bark/40 whitespace-nowrap">{d}</time>
+                </div>
+
+                <!-- 分隔線（桌機） -->
+                <div class="hidden sm:block w-px bg-wood/10 self-stretch shrink-0"></div>
+
+                <!-- 標題 + 摘要 + 閱讀更多 -->
+                <div class="flex-1 min-w-0">
+                  <h2 class="text-base sm:text-lg font-bold text-bark group-hover:text-olive-dark
+                             transition-colors leading-snug mb-2">
+                    {post.data.title}
+                  </h2>
+                  <p class="text-sm text-bark/50 leading-relaxed line-clamp-2 mb-4">
+                    {post.data.description}
+                  </p>
+                  <span class="inline-flex items-center gap-1 text-sm font-semibold text-olive
+                               group-hover:gap-2 transition-all duration-200">
+                    閱讀更多
+                    <span class="group-hover:translate-x-1 transition-transform duration-200">→</span>
+                  </span>
+                </div>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-bark text-cream/50 text-xs text-center py-6">
+    2026 © 兩棵樹創意行動工作室 twotrees.tw
+  </footer>
+
+</Layout>

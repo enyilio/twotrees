@@ -1,0 +1,203 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const d = new Date(post.data.date).toLocaleDateString('zh-TW', {
+  year: 'numeric', month: 'long', day: 'numeric'
+});
+---
+
+<Layout title={`${post.data.title} | 兩棵樹`} description={post.data.description}>
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 bg-cream/85 backdrop-blur border-b border-wood/10">
+    <div class="section-wrap flex items-center justify-between py-2" style="height:4.5rem">
+      <a href="/" class="flex items-center group">
+        <img
+          src="https://twotrees.tw/wp-content/uploads/2022/03/twtreeslogo.svg"
+          alt="兩棵樹創意行動工作室"
+          class="h-12 w-auto group-hover:scale-105 transition-transform duration-300"
+        />
+      </a>
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-bark/70">
+        <a href="/#services" class="hover:text-olive transition-colors">服務</a>
+        <a href="/#about"    class="hover:text-olive transition-colors">關於</a>
+        <a href="/blog"      class="text-olive font-bold">網站知識</a>
+        <a href="/#contact"  class="hover:text-olive transition-colors">聯絡</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="py-12 md:py-16">
+    <article class="section-wrap" style="max-width:720px; margin-left:auto; margin-right:auto">
+
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-1.5 text-xs text-bark/40 mb-10">
+        <a href="/" class="hover:text-olive transition-colors">首頁</a>
+        <span>/</span>
+        <a href="/blog" class="hover:text-olive transition-colors">網站知識</a>
+        <span>/</span>
+        <span class="text-bark/60 line-clamp-1">{post.data.title}</span>
+      </nav>
+
+      <!-- Title + date -->
+      <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-olive-dark leading-tight mb-3">
+        {post.data.title}
+      </h1>
+      <time class="text-xs text-bark/40 block mb-10 pb-8 border-b border-wood/10">{d}</time>
+
+      <!-- Featured image -->
+      {post.data.image && (
+        <img src={post.data.image} alt={post.data.title}
+          class="w-full rounded-cute mb-10 object-cover max-h-80" loading="eager" />
+      )}
+
+      <!-- Content -->
+      <div class="article-body">
+        <Content />
+      </div>
+
+      <!-- Back -->
+      <div class="mt-14 pt-8 border-t border-wood/10">
+        <a href="/blog" class="inline-flex items-center gap-1.5 text-sm font-semibold text-olive hover:text-olive-dark transition-colors">
+          ← 返回網站知識
+        </a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="bg-bark text-cream/50 text-xs text-center py-6 mt-4">
+    2026 © 兩棵樹創意行動工作室 twotrees.tw
+  </footer>
+</Layout>
+
+<style is:global>
+  /* ── 文章內文排版 ── */
+  .article-body {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: #3D2B1F;
+  }
+
+  /* 段落間距 */
+  .article-body p {
+    margin-bottom: 1.4em;
+  }
+
+  /* 標題層級 */
+  .article-body h1,
+  .article-body h2,
+  .article-body h3,
+  .article-body h4 {
+    font-family: 'Noto Serif TC', Georgia, serif;
+    font-weight: 700;
+    color: #4E5A30;
+    margin-top: 2em;
+    margin-bottom: 0.6em;
+    line-height: 1.35;
+  }
+  .article-body h2 { font-size: 1.35rem; border-bottom: 2px solid #D4E8B0; padding-bottom: 0.3em; }
+  .article-body h3 { font-size: 1.15rem; }
+  .article-body h4 { font-size: 1rem; }
+
+  /* 連結 */
+  .article-body a {
+    color: #6B7A45;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .article-body a:hover { color: #4E5A30; }
+
+  /* 圖片 */
+  .article-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    margin: 1.5em auto;
+    display: block;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  /* 清單 */
+  .article-body ul,
+  .article-body ol {
+    padding-left: 1.4em;
+    margin-bottom: 1.4em;
+  }
+  .article-body li {
+    margin-bottom: 0.4em;
+  }
+  .article-body ul li { list-style: disc; }
+  .article-body ol li { list-style: decimal; }
+
+  /* 粗體 */
+  .article-body strong { color: #3D2B1F; font-weight: 700; }
+
+  /* 完全覆蓋 pre / code — 用一般段落樣式呈現，不用等寬字體 */
+  .article-body pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: #F0EDE6;
+    border-left: 3px solid #A07850;
+    border-radius: 0.5rem;
+    padding: 1em 1.2em;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin-bottom: 1.4em;
+    overflow-x: auto;
+  }
+  .article-body code {
+    background: #F0EDE6;
+    color: #7A5A38;
+    padding: 0.15em 0.4em;
+    border-radius: 0.3rem;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 0.9em;
+  }
+  .article-body pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+  }
+
+  /* 水平分隔線 */
+  .article-body hr {
+    border: none;
+    border-top: 1px solid #D4E8B0;
+    margin: 2em 0;
+  }
+
+  /* blockquote */
+  .article-body blockquote {
+    border-left: 4px solid #6B7A45;
+    background: #F0EDE6;
+    margin: 1.5em 0;
+    padding: 0.8em 1.2em;
+    border-radius: 0 0.5rem 0.5rem 0;
+    color: #5a5a5a;
+    font-style: italic;
+  }
+
+  /* 表格 */
+  .article-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.4em;
+    font-size: 0.92rem;
+  }
+  .article-body th, .article-body td {
+    border: 1px solid #D4E8B0;
+    padding: 0.5em 0.8em;
+    text-align: left;
+  }
+  .article-body th { background: #F0EDE6; font-weight: 700; }
+</style>

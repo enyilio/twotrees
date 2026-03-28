@@ -1,0 +1,160 @@
+---
+export interface Props {
+  label:    string;
+  href?:    string;
+  variant?: 'olive' | 'wood' | 'ghost';
+  size?:    'sm' | 'md' | 'lg';
+  icon?:    string;       // emoji 或任何字串
+}
+
+const {
+  label,
+  href,
+  variant = 'olive',
+  size    = 'md',
+  icon,
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+
+const base = [
+  'cute-btn',
+  'relative inline-flex items-center justify-center gap-2',
+  'font-semibold rounded-cuter select-none cursor-pointer',
+  'transition-all duration-200',
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-olive focus-visible:ring-offset-2',
+].join(' ');
+
+const sizes = {
+  sm: 'text-sm  px-5  py-2',
+  md: 'text-base px-7  py-3',
+  lg: 'text-lg  px-9  py-4',
+};
+
+const variants = {
+  olive: [
+    'bg-olive text-cream',
+    'shadow-[0_4px_0_#4E5A30]',
+    'hover:bg-olive-light hover:shadow-[0_6px_0_#4E5A30] hover:-translate-y-0.5',
+    'active:shadow-[0_1px_0_#4E5A30] active:translate-y-0.5',
+  ].join(' '),
+
+  wood: [
+    'bg-wood text-cream',
+    'shadow-[0_4px_0_#7A5A38]',
+    'hover:bg-wood-light hover:shadow-[0_6px_0_#7A5A38] hover:-translate-y-0.5',
+    'active:shadow-[0_1px_0_#7A5A38] active:translate-y-0.5',
+  ].join(' '),
+
+  ghost: [
+    'bg-transparent text-olive border-2 border-olive',
+    'hover:bg-leaf hover:-translate-y-0.5',
+    'active:translate-y-0.5',
+  ].join(' '),
+};
+---
+
+<Tag
+  href={href}
+  class={`${base} ${sizes[size]} ${variants[variant]}`}
+  data-cute-btn
+>
+  {icon && <span class="icon" aria-hidden="true">{icon}</span>}
+  <span class="label">{label}</span>
+
+  <!-- 點擊漣漪容器 -->
+  <span class="ripple-wrap pointer-events-none absolute inset-0 overflow-hidden rounded-cuter" aria-hidden="true"></span>
+</Tag>
+
+<style>
+  /* ── 膨脹動畫 ── hover 時觸發 inflate keyframe */
+  .cute-btn .icon {
+    display: inline-block;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .cute-btn:hover .icon {
+    transform: scale(1.35) rotate(-8deg);
+  }
+
+  /* ── 漣漪效果 ── JS 動態插入 <span class="ripple"> ── */
+  .cute-btn .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.45);
+    transform: scale(0);
+    animation: ripple-expand 0.55s linear forwards;
+    pointer-events: none;
+  }
+
+  @keyframes ripple-expand {
+    to { transform: scale(4); opacity: 0; }
+  }
+
+  /* ── 整顆按鈕 hover 膨脹 ── */
+  @keyframes btn-puff {
+    0%   { transform: scale(1); }
+    45%  { transform: scale(1.07) translateY(-2px); }
+    70%  { transform: scale(1.03) translateY(-1px); }
+    100% { transform: scale(1)   translateY(0); }
+  }
+
+  .cute-btn:hover {
+    animation: btn-puff 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  /* 深色陰影版：防止 hover 改 translate 跟 shadow 衝突 */
+  .cute-btn:hover,
+  .cute-btn:active {
+    animation: none; /* 讓 Tailwind hover utility 接手 translate/shadow */
+  }
+
+  /* 重新用純 CSS hover 膨脹，不與 Tailwind 衝突 */
+  .cute-btn {
+    will-change: transform;
+  }
+</style>
+
+<script>
+  // 漣漪點擊效果
+  document.querySelectorAll<HTMLElement>('[data-cute-btn]').forEach((btn) => {
+    btn.addEventListener('click', (e: MouseEvent) => {
+      const wrap = btn.querySelector<HTMLElement>('.ripple-wrap');
+      if (!wrap) return;
+
+      const r   = btn.getBoundingClientRect();
+      const size = Math.max(r.width, r.height) * 1.5;
+      const x   = e.clientX - r.left - size / 2;
+      const y   = e.clientY - r.top  - size / 2;
+
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      ripple.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px`;
+      wrap.appendChild(ripple);
+      ripple.addEventListener('animationend', () => ripple.remove());
+    });
+
+    // 膨脹：mouseenter 時加 class，animationend 後移除
+    btn.addEventListener('mouseenter', () => {
+      btn.classList.remove('is-puffing');
+      void btn.offsetWidth; // reflow
+      btn.classList.add('is-puffing');
+    });
+    btn.addEventListener('animationend', () => {
+      btn.classList.remove('is-puffing');
+    });
+  });
+</script>
+
+<style>
+  /* 膨脹 class 版本，用 JS 觸發，不與 Tailwind hover 衝突 */
+  @keyframes btn-inflate {
+    0%   { transform: scale(1)   translateY(0);   }
+    40%  { transform: scale(1.1) translateY(-4px); }
+    70%  { transform: scale(1.05) translateY(-2px);}
+    100% { transform: scale(1)   translateY(0);   }
+  }
+
+  .cute-btn.is-puffing {
+    animation: btn-inflate 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+  }
+</style>

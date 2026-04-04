@@ -1,6 +1,6 @@
 ---
 title: 解決 Google Workspace 網域別名 DMARC 對齊失效之實務指南
-date: "2025-06-10"
+date: "2026-04-04"
 description: "當企業使用 Google Workspace 網域別名（Domain Alias）發信時，常會遇到 DMARC 驗證失敗。本文說明根本原因與透過獨立 DKIM 選擇器徹底解決對齊失效的實務步驟。"
 categories: ["網站相關知識"]
 ---
